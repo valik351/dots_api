@@ -2,10 +2,7 @@
 
 namespace App;
 
-use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Carbon\Carbon;
 
 /**
  * App\TestingServer
@@ -30,7 +27,7 @@ use Carbon\Carbon;
  * @method static \Illuminate\Database\Query\Builder|\App\TestingServer wherePassword($value)
  * @mixin \Eloquent
  */
-class TestingServer extends Authenticatable
+class TestingServer extends AuthenticatableModel
 {
     use SoftDeletes;
     use Sortable;
@@ -47,39 +44,4 @@ class TestingServer extends Authenticatable
     protected $fillable = [
         'name', 'login', 'password', 'token_created_at'
     ];
-
-    const TOKEN_TTL = 60 * 60; //seconds
-
-    public function isTokenValid()
-    {
-        if ($this->api_token && Carbon::parse($this->attributes['token_created_at'])->diffInSeconds(Carbon::now()) < self::TOKEN_TTL) {
-            return true;
-        }
-        return false;
-    }
-
-    public static function getValidationRules()
-    {
-        return [
-            'name' => 'required|string|max:255',
-        ];
-    }
-
-    public function setPasswordAttribute($value)
-    {
-        $this->attributes['password'] = bcrypt($value);
-
-        return $this;
-    }
-
-    public function setApiTokenAttribute($value)
-    {
-        $this->attributes['api_token'] = $value;
-        $this->token_created_at = Carbon::now();
-    }
-
-    public static function generateApiToken()
-    {
-        return str_random(60);
-    }
 }
