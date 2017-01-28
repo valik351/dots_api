@@ -14,7 +14,7 @@ abstract class AuthenticatableController extends Controller
     {
         $model = forward_static_call([$this->getModel(), 'where'], 'login', $request->getUser())->first();
         if (!Hash::check($request->getPassword(), $model->password)) {
-            return response('Unathorized', 401);
+            return response('Unauthorized', 401);
         }
 
         if (!$model->isTokenValid()) {
