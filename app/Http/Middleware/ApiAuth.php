@@ -13,7 +13,7 @@ class ApiAuth
         return response('Unauthorized', 401);
     }
 
-    public function handle($request, Closure $next, $guard = null, $class = 'App\TestingServer', $auth = 'bearer')
+    public function handle($request, Closure $next, $guard = null, $class = 'App\Client', $auth = 'bearer')
     {
         if ($auth === 'bearer') {
             $model = forward_static_call([$class, 'where'], 'api_token', $request->bearerToken())->first();
