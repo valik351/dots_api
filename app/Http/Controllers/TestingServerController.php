@@ -92,10 +92,8 @@ class TestingServerController extends AuthenticatableController
     {
         $testing_server = (!$id ?: $this->findOrFail($id));
         $rules = TestingServer::getValidationRules();
-        $fillData = ['name' => $request->get('name'), 'login' => $request->get('login')];
         if (!$id || $request->get('password') != '') {
             $rules = array_merge($rules, ['password' => 'required|min:6|confirmed']);
-            $fillData = array_merge($fillData, ['password' => $request->get('password')]);
         }
 
         if($id) {
@@ -106,6 +104,7 @@ class TestingServerController extends AuthenticatableController
 
         $this->validate($request, $rules);
 
+        $fillData = $request->all() + ['api_token' => ''];
 
         if ($id) {
             $testing_server->fill($fillData);

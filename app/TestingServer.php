@@ -42,6 +42,6 @@ class TestingServer extends AuthenticatableModel
      * @var array
      */
     protected $fillable = [
-        'name', 'login', 'password', 'token_created_at'
+        'name', 'login', 'api_token', 'password', 'token_created_at'
     ];
 }

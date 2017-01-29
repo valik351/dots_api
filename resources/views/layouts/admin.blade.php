@@ -7,9 +7,6 @@
 
     <title>@lang('layout.dots_caps')</title>
 
-    <link href="{{ asset('backend-bundle/css/bundle' . (config('app.assets.minified', false) ? '.min' : '') . '.css') }}"
-          rel='stylesheet' type='text/css'>
-
 </head>
 <body class="nav-md">
 <div class="container body">
@@ -25,9 +22,6 @@
 
                 <!-- menu profile quick info -->
                 <div class="profile">
-                    <div class="profile_pic">
-                        <img src="{{ Auth::user()->avatar }}" alt="..." class="img-circle profile_img">
-                    </div>
                     <div class="profile_info">
                         <span>Welcome,</span>
                         <h2>{{ Auth::user()->name }}</h2>
@@ -98,7 +92,6 @@
 
 {{--@yield('content')--}}
 
-<script src="{{ asset('backend-bundle/js/bundle' . (config('app.assets.minified', false) ? '.min' : '') . '.js') }}"></script>
-<script src="//cdn.ckeditor.com/4.5.11/standard/ckeditor.js"></script>
+<script src="{{ asset('assets/app.js') }}"></script>
 </body>
 </html>
