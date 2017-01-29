@@ -31,6 +31,8 @@ class ProgrammingLanguage extends Model
     use SoftDeletes;
     use Sortable;
 
+    public $visible = ['id', 'name', 'compiler_image', 'executor_image'];
+
     protected $fillable = [
         'name', 'ace_mode', 'compiler_image', 'executor_image',
     ];

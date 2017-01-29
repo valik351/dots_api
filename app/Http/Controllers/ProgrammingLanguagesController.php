@@ -16,17 +16,6 @@ class ProgrammingLanguagesController extends Controller
      */
     public function index(Request $request)
     {
-        $response = [];
-
-        foreach (ProgrammingLanguage::all() as $language) {
-            $response[] = [
-                'id'             => $language->id,
-                'title'          => $language->name,
-                'compiler_image' => $language->compiler_image,
-                'executor_image' => $language->executor_image,
-            ];
-        }
-
-        return $response;
+        return ProgrammingLanguage::all();
     }
 }
