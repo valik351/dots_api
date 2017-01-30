@@ -31,3 +31,6 @@ Route::group(['middleware' => 'auth.api_custom:null,App\TestingServer,bearer'], 
     });
     Route::get('/programming-languages', 'ProgrammingLanguagesController@index');
 });
+
+//todo: refactor, add auth
+Route::get('problem/{id}', 'Api\ProblemController@show')->where('id', '[0-9]+');
