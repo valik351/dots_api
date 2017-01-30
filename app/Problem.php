@@ -75,21 +75,21 @@ class Problem extends Model
 
         return $dir;
     }
-/*
-    public static function getAlternateFilePath()
-    {
-        return base_path('var/test_db/');
-    }*/
+    /*
+        public static function getAlternateFilePath()
+        {
+            return base_path('var/test_db/');
+        }*/
 
-/*    public function volumes()
-    {
-        return $this->belongsToMany('App\Volume');
-    }*/
+    /*    public function volumes()
+        {
+            return $this->belongsToMany('App\Volume');
+        }*/
 
-/*    public function contests()
-    {
-        return $this->belongsToMany(Contest::class, 'contest_problem', 'problem_id', 'contest_id')->withTimestamps();
-    }*/
+    /*    public function contests()
+        {
+            return $this->belongsToMany(Contest::class, 'contest_problem', 'problem_id', 'contest_id')->withTimestamps();
+        }*/
 
     public function setImage($name)
     {
@@ -123,7 +123,11 @@ class Problem extends Model
 
     public function getArchiveAttribute($value)
     {
-        return File::get($this->getFilePath() . $value);
+        try {
+            return File::get($this->getFilePath() . $value);
+        } catch (\Exception $e) {
+            return null;
+        }
     }
 
     public function getArchivePath() {
